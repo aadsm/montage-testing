@@ -29,7 +29,11 @@ function createJavaScriptContext() {
 
     iframe.style.display = "none";
     document.body.appendChild(iframe);
-    context = iframe.contentWindow;
+    context = {};
+    for (var key in iframe.contentWindow) {
+        context[key] = iframe.contentWindow[key];
+    }
+    context.document = iframe.contentDocument;
     iframe.parentNode.removeChild(iframe);
 
     return context;
